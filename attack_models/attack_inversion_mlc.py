@@ -253,12 +253,12 @@ if __name__ == "__main__":
     attack_layer = args.target_layer
     
     # train inversion model for fine-tune
-    # ft_model_path = '/'.join(task_info[:key_index+2]+['ft'])    
-    # ft_model = AutoModelForTokenClassification.from_pretrained(ft_model_path)
-    # print('load fine-tune feature to memory')
-    # ft_train_dataloader = dataloader2memory(train_dataloader, ft_model, target_layer=args.target_layer)
-    # inversion_model = train_inversion_model_mlc(ft_train_dataloader, output_dir=args.model_name_or_path)
-    inversion_model = torch.load(args.model_name_or_path+'/inversion_model_mlc_ft.pt')
+    ft_model_path = '/'.join(task_info[:key_index+2]+['ft'])    
+    ft_model = AutoModelForTokenClassification.from_pretrained(ft_model_path)
+    print('load fine-tune feature to memory')
+    ft_train_dataloader = dataloader2memory(train_dataloader, ft_model, target_layer=args.target_layer)
+    inversion_model = train_inversion_model_mlc(ft_train_dataloader, output_dir=args.model_name_or_path)
+    # inversion_model = torch.load(args.model_name_or_path+'/inversion_model_mlc_ft.pt')
     
     # evaluate inversion model on textfusion
     print('load textfusion feature to memory')
